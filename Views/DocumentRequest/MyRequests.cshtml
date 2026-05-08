@@ -1,0 +1,71 @@
+@model List<BarangaySystem.Models.DocumentRequest>
+@{ ViewData["Title"] = "My Requests"; }
+ 
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-list-ul"></i> My Requests</h2>
+    <a asp-action="Submit" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> New Request
+    </a>
+</div>
+ 
+@if (!Model.Any())
+{
+    <!-- Show this when the list is empty -->
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i>
+        You have not submitted any requests yet.
+        <a asp-action="Submit">Submit your first request.</a>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Reference No.</th>
+                    <th>Document Type</th>
+                    <th>Purpose</th>
+                    <th>Date Filed</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var req in Model)
+                {
+                    <tr>
+                        <td><strong>@req.ReferenceNumber</strong></td>
+                        <td>@req.DocumentType?.Name</td>
+                        <td>@req.Purpose</td>
+                        <td>@req.RequestDate.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            @* Color-coded badge based on status *@
+                            @{ 
+                                var badgeClass = req.Status switch {
+                                    "Pending"         => "status-pending",
+                                    "Processing"      => "status-processing",
+                                    "Ready for Pickup"=> "status-ready",
+                                    "Released"        => "status-released",
+                                    "Rejected"        => "status-rejected",
+                                    _                  => "status-default"
+                                };
+                            }
+                            <span class="badge status-badge @badgeClass">@req.Status</span>
+                        </td>
+                        <td>
+                            @* Only show Download if status allows it *@
+                            @if (req.Status == "Ready for Pickup" || req.Status == "Released")
+                            {
+                                <a asp-action="DownloadPdf" asp-route-id="@req.Id"
+                                   class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-download"></i> PDF
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

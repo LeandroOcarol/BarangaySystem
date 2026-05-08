@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Submit a Request";
+}
+ 
+<h2 class="mb-4"><i class="bi bi-file-earmark-plus"></i> Submit a Document Request</h2>
+ 
+<div class="row">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+ 
+                <!-- This form POSTs to DocumentRequestController.Submit(int documentTypeId, string purpose) -->
+                <form asp-action="Submit" asp-controller="DocumentRequest" method="post">
+                    @Html.AntiForgeryToken()
+ 
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Document Type</label>
+                        <!-- name='documentTypeId' must match the parameter name in the C# action -->
+                        <select name="documentTypeId" class="form-select" required>
+                            <option value="">-- Select a document --</option>
+ 
+                            @* Loop through ViewBag.DocumentTypes sent from the controller *@
+                            @foreach (var docType in (List<BarangaySystem.Models.DocumentType>)ViewBag.DocumentTypes)
+                            {
+                                <option value="@docType.Id">
+                                    @docType.Name
+                                    @if (docType.Fee > 0) { <text> - ₱@docType.Fee</text> }
+                                </option>
+                            }
+                        </select>
+                    </div>
+ 
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Purpose</label>
+                        <!-- name='purpose' matches the string purpose parameter in the C# action -->
+                        <textarea name="purpose" class="form-control" rows="3"
+                            placeholder="e.g. For employment, scholarship application..." required></textarea>
+                    </div>
+ 
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Submit Request
+                    </button>
+                    <a asp-action="MyRequests" class="btn btn-secondary ms-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Info panel on the right -->
+    <div class="col-md-5">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h6 class="card-title"><i class="bi bi-info-circle"></i> How it works</h6>
+                <ol class="mb-0">
+                    <li>Submit your request online</li>
+                    <li>Wait for barangay staff to process it</li>
+                    <li>You will be notified when it is ready</li>
+                    <li>Pick up the official document at the barangay office</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

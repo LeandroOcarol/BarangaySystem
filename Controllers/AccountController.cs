@@ -90,5 +90,14 @@ namespace BarngaySystem.Controllers
             TempData["Success"] = "Register! You can now log in.";
             return RedirectToAction("Login");
         }
+
+        // Process Logout Form
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("CookieAuth");
+            return RedirectToAction("Login");
+        }
     }
 }

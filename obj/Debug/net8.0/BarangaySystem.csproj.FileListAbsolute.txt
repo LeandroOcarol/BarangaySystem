@@ -156,3 +156,4 @@ C:\Users\HF\Desktop\BarangaySystem\obj\Debug\net8.0\refint\BarangaySystem.dll
 C:\Users\HF\Desktop\BarangaySystem\obj\Debug\net8.0\BarangaySystem.pdb
 C:\Users\HF\Desktop\BarangaySystem\obj\Debug\net8.0\BarangaySystem.genruntimeconfig.cache
 C:\Users\HF\Desktop\BarangaySystem\obj\Debug\net8.0\ref\BarangaySystem.dll
+C:\Users\HF\Desktop\BarangaySystem\obj\Debug\net8.0\BarangaySystem.sourcelink.json

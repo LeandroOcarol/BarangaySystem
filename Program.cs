@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using BarangaySystem.Data;
 using BarangaySystem.Models;
-//using BarangaySystem.Services;
+using BarangaySystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", options
 builder.Services.AddAuthorization();
 
 // 4. Register PdfService so it can be injected into controllers
-//builder.Services.AddScoped<PdfService>();
+builder.Services.AddScoped<PdfService>();
 
 var app = builder.Build();
 

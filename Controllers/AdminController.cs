@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Security.Claims;
 using BarangaySystem.Data;
 using BarangaySystem.Models;
@@ -66,7 +67,7 @@ namespace BarangaySystem.Controllers
 
         // Update the status of a request
         [HttpPost]
-        public async Task<IActionResult> UpdateStatus(int id, string newStatus, string remarks)
+        public async Task<IActionResult> UpdateStatus(int id, string newStatus, string? remarks)
         {
             var request = await _context.DocumentRequests.FindAsync(id);
             if (request == null) return NotFound();
@@ -74,7 +75,12 @@ namespace BarangaySystem.Controllers
             string oldStatus = request.Status;
             request.Status = newStatus;
             request.LastUpdated = DateTime.Now;
-            request.AdminRemarks = remarks;
+            request.AdminRemarks = string.IsNullOrWhiteSpace(remarks) ? null : remarks;
+
+            if (newStatus == "Ready for Pickup")
+            {
+                request.IsReadyNotificationSeen = false;
+            }
 
             // Write an audit log entry
             _context.AuditLogs.Add(new AuditLog
@@ -83,7 +89,7 @@ namespace BarangaySystem.Controllers
                ChangedByName = User.Identity?.Name ?? "Admin",
                OldStatus = oldStatus,
                NewStatus = newStatus,
-               Remarks = remarks 
+               Remarks = string.IsNullOrWhiteSpace(remarks) ? "" : remarks 
             });
 
             await _context.SaveChangesAsync();
@@ -125,6 +131,90 @@ namespace BarangaySystem.Controllers
                 .FirstOrDefault() ?? "None yet";
             
             return View(list);
+        }
+
+        // Admin: Manage document types
+        public async Task<IActionResult> DocumentTypes()
+        {
+            var types = await _context.DocumentTypes.ToListAsync();
+            return View(types);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddDocumentType(DocumentType model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var types = await _context.DocumentTypes.ToListAsync();
+                return View("DocumentTypes", types);
+            }
+
+            if (Request.Form.TryGetValue("IsActive", out var isActiveValues))
+            {
+                model.IsActive = isActiveValues.Any(v => string.Equals(v, "true", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(v, "on", StringComparison.OrdinalIgnoreCase));
+            }
+
+            _context.DocumentTypes.Add(model);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Document type added successfully.";
+            return RedirectToAction("DocumentTypes");
+        }
+
+        // Show edit form for a document type
+        public async Task<IActionResult> EditDocumentType(int id)
+        {
+            var type = await _context.DocumentTypes.FindAsync(id);
+            if (type == null) return NotFound();
+            return View(type);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateDocumentType(DocumentType model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("EditDocumentType", model);
+            }
+
+            var type = await _context.DocumentTypes.FindAsync(model.Id);
+            if (type == null) return NotFound();
+
+            type.Name = model.Name;
+            type.Description = model.Description;
+            type.Fee = model.Fee;
+            type.IsActive = model.IsActive;
+
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Document type updated successfully.";
+            return RedirectToAction("DocumentTypes");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteDocumentType(int id)
+        {
+            var type = await _context.DocumentTypes
+                .Include(t => t.Requests)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (type == null) return NotFound();
+
+            if (type.Requests.Any())
+            {
+                TempData["Error"] = "Cannot delete a document type that has existing requests. Set it inactive instead.";
+                return RedirectToAction("DocumentTypes");
+            }
+
+            _context.DocumentTypes.Remove(type);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Document type deleted.";
+            return RedirectToAction("DocumentTypes");
         }
     }
 }

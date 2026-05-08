@@ -1,0 +1,86 @@
+@{ ViewData["Title"] = "Admin Dashboard"; }
+ 
+<h2 class="mb-4"><i class="bi bi-speedometer2"></i> Admin Dashboard</h2>
+ 
+<!-- Summary cards row -->
+<div class="row g-3 mb-4">
+ 
+    <!-- Total Requests card -->
+    <div class="col-md-3">
+        <div class="card text-white bg-primary h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="card-text small mb-1">Total Requests</p>
+                        <h2 class="fw-bold">@ViewBag.Total</h2>
+                    </div>
+                    <i class="bi bi-folder2-open dashboard-card-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Pending card -->
+    <div class="col-md-3">
+        <div class="card text-dark bg-warning h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="card-text small mb-1">Pending</p>
+                        <h2 class="fw-bold">@ViewBag.Pending</h2>
+                    </div>
+                    <i class="bi bi-hourglass-split dashboard-card-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Processing card -->
+    <div class="col-md-3">
+        <div class="card text-dark bg-info h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="card-text small mb-1">Processing</p>
+                        <h2 class="fw-bold">@ViewBag.Processing</h2>
+                    </div>
+                    <i class="bi bi-gear dashboard-card-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Today card -->
+    <div class="col-md-3">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="card-text small mb-1">Today's Requests</p>
+                        <h2 class="fw-bold">@ViewBag.Today</h2>
+                    </div>
+                    <i class="bi bi-calendar-check dashboard-card-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Quick links row -->
+<div class="row g-3">
+    <div class="col-md-4">
+        <a asp-action="AllRequests" class="btn btn-outline-primary w-100 py-3">
+            <i class="bi bi-table fs-4 d-block mb-1"></i> View All Requests
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="Reports" class="btn btn-outline-success w-100 py-3">
+            <i class="bi bi-bar-chart fs-4 d-block mb-1"></i> View Reports
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="DocumentTypes" class="btn btn-outline-secondary w-100 py-3">
+            <i class="bi bi-file-earmark-text fs-4 d-block mb-1"></i> Manage Document Types
+        </a>
+    </div>
+</div>

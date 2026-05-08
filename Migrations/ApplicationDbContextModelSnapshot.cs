@@ -68,11 +68,13 @@ namespace BarangaySystem.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AdminRemarks")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DocumentTypeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsReadyNotificationSeen")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
@@ -202,10 +204,10 @@ namespace BarangaySystem.Migrations
                             Id = 1,
                             Address = "Barangay Hall",
                             ContactNumber = "09000000000",
-                            CreatedAt = new DateTime(2026, 5, 6, 16, 56, 39, 988, DateTimeKind.Local).AddTicks(129),
+                            CreatedAt = new DateTime(2026, 5, 8, 18, 1, 45, 953, DateTimeKind.Local).AddTicks(1423),
                             Email = "admin@barangay.gov.ph",
                             FullName = "Barangay Admin",
-                            PasswordHash = "$2a$11$z.po9H9NaDmMWF2VB33Ua.2K5bIOtO70LQHSh3vxuFkgc000hkVDS",
+                            PasswordHash = "$2a$11$BzRMQ.3lUQBE7eAvnOUxOuhGUcIseNq0DsWrOteucHnEw/n4iP6va",
                             Role = "Admin"
                         });
                 });

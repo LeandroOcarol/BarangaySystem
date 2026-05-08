@@ -1,0 +1,101 @@
+@model List<BarangaySystem.Models.DocumentType>
+@{ ViewData["Title"] = "Manage Document Types"; }
+
+<div class="row align-items-center mb-3">
+    <div class="col-md-8">
+        <h2><i class="bi bi-file-earmark-text"></i> Manage Document Types</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a asp-action="Dashboard" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Add New Document Type</h5>
+                <form asp-action="AddDocumentType" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input name="Name" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="Description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fee</label>
+                        <input name="Fee" class="form-control" type="number" step="0.01" min="0" />
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input type="hidden" name="IsActive" value="false" />
+                        <input name="IsActive" class="form-check-input" type="checkbox" value="true" checked />
+                        <label class="form-check-label">Active</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Document Type</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Existing Document Types</h5>
+                @if (!Model.Any())
+                {
+                    <div class="alert alert-info">No document types have been created yet.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Fee</th>
+                                    <th>Active</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var type in Model)
+                                {
+                                    <tr>
+                                        <td>@type.Name</td>
+                                        <td>@type.Description</td>
+                                        <td>₱@type.Fee</td>
+                                        <td>@(type.IsActive ? "Yes" : "No")</td>
+                                        <td>
+                                            <a asp-action="EditDocumentType" asp-route-id="@type.Id" class="btn btn-sm btn-outline-primary me-2">
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </a>
+                                            <form asp-action="DeleteDocumentType" method="post" class="d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@type.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this document type?');">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

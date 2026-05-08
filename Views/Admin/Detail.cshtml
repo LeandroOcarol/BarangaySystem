@@ -1,0 +1,106 @@
+@model BarangaySystem.Models.DocumentRequest
+@{ ViewData["Title"] = "Request Detail"; }
+ 
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-file-earmark-text"></i> Request Detail</h2>
+    <a asp-action="AllRequests" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back
+    </a>
+</div>
+ 
+<div class="row g-4">
+ 
+    <!-- Left: Request info -->
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header bg-primary text-white fw-bold">Request Information</div>
+            <div class="card-body">
+                <table class="table table-bordered mb-0">
+                    <tr><th class="table-light w-40">Reference No.</th><td><strong>@Model.ReferenceNumber</strong></td></tr>
+                    <tr><th class="table-light">Resident</th><td>@Model.User?.FullName</td></tr>
+                    <tr><th class="table-light">Contact</th><td>@Model.User?.ContactNumber</td></tr>
+                    <tr><th class="table-light">Address</th><td>@Model.User?.Address</td></tr>
+                    <tr><th class="table-light">Document Type</th><td>@Model.DocumentType?.Name</td></tr>
+                    <tr><th class="table-light">Purpose</th><td>@Model.Purpose</td></tr>
+                    <tr><th class="table-light">Date Filed</th><td>@Model.RequestDate.ToString("MMMM dd, yyyy")</td></tr>
+                    <tr><th class="table-light">Current Status</th>
+                        @{ var statusClass = Model.Status switch {
+                            "Pending" => "status-pending",
+                            "Processing" => "status-processing",
+                            "Ready for Pickup" => "status-ready",
+                            "Released" => "status-released",
+                            "Rejected" => "status-rejected",
+                            _ => "status-default" };
+                        }
+                        <td><span class="badge status-badge @statusClass">@Model.Status</span></td></tr>
+                    @if (!string.IsNullOrEmpty(Model.AdminRemarks))
+                    {
+                        <tr><th class="table-light">Remarks</th><td>@Model.AdminRemarks</td></tr>
+                    }
+                </table>
+            </div>
+        </div>
+ 
+        <!-- Audit Log -->
+        @if (Model.AuditLogs.Any())
+        {
+            <div class="card mt-3">
+                <div class="card-header"><i class="bi bi-clock-history"></i> Status History</div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var log in Model.AuditLogs.OrderByDescending(l => l.ChangedAt))
+                    {
+                        <li class="list-group-item">
+                            <strong>@log.OldStatus</strong>
+                            <i class="bi bi-arrow-right text-muted"></i>
+                            <strong class="text-success">@log.NewStatus</strong>
+                            <small class="text-muted d-block">
+                                by @log.ChangedByName on @log.ChangedAt.ToString("MMM dd, yyyy hh:mm tt")
+                            </small>
+                            @if (!string.IsNullOrEmpty(log.Remarks))
+                            {
+                                <small class="text-muted">Remarks: @log.Remarks</small>
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+ 
+    <!-- Right: Update status -->
+    <div class="col-md-5">
+        <div class="card border-primary">
+            <div class="card-header bg-primary text-white fw-bold">
+                <i class="bi bi-pencil-square"></i> Update Status
+            </div>
+            <div class="card-body">
+                <!-- POSTs to AdminController.UpdateStatus(int id, string newStatus, string remarks) -->
+                <form asp-action="UpdateStatus" asp-controller="Admin" method="post">
+                    @Html.AntiForgeryToken()
+ 
+                    <!-- Hidden field sends the request ID to the controller -->
+                    <input type="hidden" name="id" value="@Model.Id" />
+ 
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">New Status</label>
+                        <select name="newStatus" class="form-select" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Ready for Pickup">Ready for Pickup</option>
+                            <option value="Released">Released</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Remarks (optional)</label>
+                        <textarea name="remarks" class="form-control" rows="3"
+                            placeholder="Add a note for the resident..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-check-circle"></i> Update Status
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

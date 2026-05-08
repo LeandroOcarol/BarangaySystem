@@ -1,0 +1,99 @@
+@model List<BarangaySystem.Models.DocumentRequest>
+@{ ViewData["Title"] = "Reports"; }
+ 
+<h2 class="mb-3"><i class="bi bi-bar-chart"></i> Reports</h2>
+ 
+<!-- Period selector (GET form — period goes in the URL) -->
+<div class="btn-group mb-4">
+    <a asp-action="Reports" asp-route-period="daily"
+       class="btn @(ViewBag.Period == "daily" ? "btn-primary" : "btn-outline-primary")">
+        Daily
+    </a>
+    <a asp-action="Reports" asp-route-period="weekly"
+       class="btn @(ViewBag.Period == "weekly" ? "btn-primary" : "btn-outline-primary")">
+        Weekly
+    </a>
+    <a asp-action="Reports" asp-route-period="monthly"
+       class="btn @(ViewBag.Period == "monthly" ? "btn-primary" : "btn-outline-primary")">
+        Monthly
+    </a>
+</div>
+ 
+<!-- Summary cards -->
+<div class="row mb-4" style="gap: 10px;">
+    @{
+        var stats = new (string Label, string Key, string Color)[]
+        {
+            ("Total",     "Total",      "primary"),
+            ("Pending",   "Pending",    "warning"),
+            ("Processing","Processing", "info"),
+            ("Ready",     "Ready",      "success"),
+            ("Released",  "Released",   "secondary"),
+            ("Rejected",  "Rejected",   "danger"),
+        };
+    }
+    @foreach (var (label, key, color) in stats)
+    {
+        var value = key switch
+        {
+            "Total" => ViewBag.Total,
+            "Pending" => ViewBag.Pending,
+            "Processing" => ViewBag.Processing,
+            "Ready" => ViewBag.Ready,
+            "Released" => ViewBag.Released,
+            "Rejected" => ViewBag.Rejected,
+            _ => 0
+        };
+        var textColor = color switch
+        {
+            "primary" => "text-white",
+            "success" => "text-white",
+            "danger" => "text-white",
+            _ => "text-dark"
+        };
+
+        <div class="col-6 col-sm-4 col-md-2">
+            <div class="card bg-@color @textColor summary-card text-center h-100 shadow-sm">
+                <div class="stat-value">@value</div>
+                <div class="stat-label">@label</div>
+            </div>
+        </div>
+    }
+</div>
+ 
+<p class="text-muted">Most Requested: <strong>@ViewBag.TopType</strong></p>
+ 
+<!-- Printable table -->
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Reference</th><th>Resident</th><th>Document</th>
+                <th>Date</th><th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var req in Model)
+            {
+                <tr>
+                    <td>@req.ReferenceNumber</td>
+                    <td>@req.User?.FullName</td>
+                    <td>@req.DocumentType?.Name</td>
+                    <td>@req.RequestDate.ToString("MMM dd, yyyy")</td>
+                    @{ var statusClass = req.Status switch {
+                        "Pending" => "status-pending",
+                        "Processing" => "status-processing",
+                        "Ready for Pickup" => "status-ready",
+                        "Released" => "status-released",
+                        "Rejected" => "status-rejected",
+                        _ => "status-default" }; }
+                    <td><span class="badge status-badge @statusClass">@req.Status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+ 
+<button onclick="window.print()" class="btn btn-outline-secondary mt-2">
+    <i class="bi bi-printer"></i> Print this Report
+</button>

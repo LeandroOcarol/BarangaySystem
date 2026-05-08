@@ -1,0 +1,82 @@
+@model List<BarangaySystem.Models.DocumentRequest>
+@{ ViewData["Title"] = "All Requests"; }
+ 
+<h2 class="mb-3"><i class="bi bi-table"></i> All Document Requests</h2>
+ 
+<!-- Search / Filter form (uses GET so filters appear in URL) -->
+<div class="card mb-4">
+    <div class="card-body pb-3">
+        <form asp-action="AllRequests" method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Search by Name</label>
+                <!-- name='name' matches string? name parameter in the C# action -->
+                <input type="text" name="name" class="form-control"
+                    placeholder="Resident name..." value="@ViewBag.CurrentSearch" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Status</label>
+                <select name="status" class="form-select">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Ready for Pickup">Ready for Pickup</option>
+                    <option value="Released">Released</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-bold">Document Type</label>
+                <select name="typeId" class="form-select">
+                    <option value="">All Types</option>
+                    @foreach (var dt in (List<BarangaySystem.Models.DocumentType>)ViewBag.DocumentTypes)
+                    {
+                        <option value="@dt.Id">@dt.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-search"></i> Filter
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Reference</th><th>Resident</th><th>Document</th>
+                    <th>Date</th><th>Status</th><th>Action</th>
+                </tr>
+            </thead>
+        <tbody>
+            @foreach (var req in Model)
+            {
+                <tr>
+                    <td><strong>@req.ReferenceNumber</strong></td>
+                    <td>@req.User?.FullName</td>
+                    <td>@req.DocumentType?.Name</td>
+                    <td>@req.RequestDate.ToString("MMM dd, yyyy")</td>
+                    <td>
+                        @{ var badgeClass = req.Status switch {
+                            "Pending" => "status-pending",
+                            "Processing" => "status-processing",
+                            "Ready for Pickup" => "status-ready",
+                            "Released" => "status-released",
+                            "Rejected" => "status-rejected",
+                            _ => "status-default" }; }
+                        <span class="badge status-badge @badgeClass">@req.Status</span>
+                    </td>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@req.Id"
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+<p class="text-muted small">Showing @Model.Count result(s)</p>

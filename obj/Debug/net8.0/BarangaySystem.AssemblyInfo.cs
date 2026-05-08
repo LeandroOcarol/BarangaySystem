@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BarangaySystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e48d948c888cc50473dfb2540b14579fccef7fbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("BarangaySystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarangaySystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

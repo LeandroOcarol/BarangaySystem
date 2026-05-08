@@ -16,8 +16,10 @@ namespace BarangaySystem.Models
         public string Status { get; set; } = "Pending";
         //Allowed Values: Pending, Processing, Ready for Pickup, Released, Rejected
 
+        public bool IsReadyNotificationSeen { get; set; } = false;
+
         public string Purpose { get; set; } = "";
-        public string AdminRemarks { get; set; } = "";
+        public string? AdminRemarks { get; set; }
         public DateTime RequestDate { get; set; } = DateTime.Now;
         public DateTime? LastUpdated { get; set; }
 

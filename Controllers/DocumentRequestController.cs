@@ -27,9 +27,25 @@ namespace BarangaySystem.Controllers
         [Authorize(Roles = "Resident")]
         public async Task<IActionResult> MyRequests()
         {
+            var userId = GetUserId();
+
+            var unseenReadyRequests = await _context.DocumentRequests
+                .Where(r => r.UserId == userId && r.Status == "Ready for Pickup" && !r.IsReadyNotificationSeen)
+                .ToListAsync();
+
+            if (unseenReadyRequests.Any())
+            {
+                foreach (var request in unseenReadyRequests)
+                {
+                    request.IsReadyNotificationSeen = true;
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
             var myRequests = await _context.DocumentRequests
                 .Include(r => r.DocumentType)
-                .Where(r => r.UserId == GetUserId())
+                .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.RequestDate)
                 .ToListAsync();
             

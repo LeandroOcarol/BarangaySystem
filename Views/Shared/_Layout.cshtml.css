@@ -1,37 +1,110 @@
 ﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+body {
+  background-color: #F2F2F0;
+  color: #1A1A1A;
+}
+
+a {
+  color: #2D4F41;
+}
+
+a:hover,
+a:focus {
+  color: #1A1A1A;
+  text-decoration: none;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-a {
-  color: #0077cc;
+nav.navbar.bg-primary {
+  background-color: #2D4F41 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+nav.navbar.bg-primary .navbar-brand,
+nav.navbar.bg-primary .nav-link,
+nav.navbar.bg-primary .navbar-toggler-icon {
+  color: #ffffff;
+}
+
+nav.navbar.bg-primary .nav-link:hover,
+nav.navbar.bg-primary .nav-link:focus,
+nav.navbar.bg-primary .navbar-brand:hover {
+  color: #f8f9fa;
+}
+
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-item form {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-link,
+.navbar .btn,
+.navbar-brand {
+  line-height: 1.5;
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #2D4F41;
+  border-color: #284a39;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #244137;
+  border-color: #203f37;
+}
+
+.btn-secondary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #89A38F;
+  border-color: #7c947e;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #7c947e;
+  border-color: #6f8676;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.card .card-body {
+  border-radius: 12px;
+}
+
+.form-control,
+.form-select,
+textarea {
+  border-radius: 12px;
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #d8d8d5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #d8d8d5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 button.accept-policy {
