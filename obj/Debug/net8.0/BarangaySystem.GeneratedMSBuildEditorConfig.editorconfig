@@ -11,85 +11,85 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BarangaySystem
 build_property.RootNamespace = BarangaySystem
-build_property.ProjectDir = C:\Users\HF\Desktop\BarangaySystem\
+build_property.ProjectDir = c:\Users\HF\Desktop\BarangaySystem\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\HF\Desktop\BarangaySystem
+build_property.MSBuildProjectDirectory = c:\Users\HF\Desktop\BarangaySystem
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Account/Login.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Account/Register.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/AllRequests.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/AllRequests.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/Dashboard.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/Detail.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/DocumentTypes.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/DocumentTypes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9jdW1lbnRUeXBlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/EditDocumentType.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/EditDocumentType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdERvY3VtZW50VHlwZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Admin/Reports.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Admin/Reports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVwb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/DocumentRequest/MyRequests.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/DocumentRequest/MyRequests.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRSZXF1ZXN0XE15UmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/DocumentRequest/Submit.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/DocumentRequest/Submit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRSZXF1ZXN0XFN1Ym1pdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Home/Index.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Home/Privacy.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Shared/Components/ReadyRequestsBadge/Default.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Shared/Components/ReadyRequestsBadge/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmVhZHlSZXF1ZXN0c0JhZGdlXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Shared/Error.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/_ViewImports.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/_ViewStart.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HF/Desktop/BarangaySystem/Views/Shared/_Layout.cshtml]
+[c:/Users/HF/Desktop/BarangaySystem/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-sg5jfgxrf6
